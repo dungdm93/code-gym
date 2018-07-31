@@ -1,3 +1,12 @@
+"""Report task
+:ref: https://www.hackerrank.com/contests/teko-test001/challenges/report-task
+"""
+
+__author__ = "dungdm93"
+__version__ = "1.0"
+__date__ = "2018-07-31"
+
+
 import functools
 
 
