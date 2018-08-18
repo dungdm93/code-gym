@@ -2,23 +2,30 @@
 :ref: https://www.hackerrank.com/contests/tin-hoc-tre-toan-quoc-2018-bang-b-thcs/challenges/number-sequence-compression
 """
 __author__ = "dungdm93"
-__version__ = "1.0"
-__date__ = "2018-08-16"
+__version__ = "2.0"
+__date__ = "2018-08-18"
 
+mod = pow(10, 9)
 
-def pascal(n):
-    curr = 1
-    for k in range(n):
-        yield curr
-        curr = curr * (n - k) // (k + 1)
-    yield curr
-
+def power(n, m):
+  if m <= 0:
+    return pow(n, m)
+  half = power(n, m // 2)
+  result = (half * half) % mod
+  if m % 2 != 0:
+    result = (n * result) % mod
+  return result
 
 if __name__ == '__main__':
+    """
+    res = 1*C(0, n-1) + 2*C(1, n-1) + ... + n*C(n-1, n-1)
+        = C(0, n-1) +   C(1, n-1) + ... +       C(n-1, n-1)
+                    + 1*C(1, n-1) + ... + (n-1)*C(n-1, n-1)
+        = (k=0,n-1)S[C(k,n-1)] + (k=0,n-1)S[k*C(k,n-1)]
+        = 2^(n-1) + (n-1)*2^(n-2)
+        = 2^(n-2)*(n+1)
+    """
     n = int(input())
 
-    mod = pow(10, 9)
-    result = 0
-    for i, p in enumerate(pascal(n - 1), start=1):
-        result = (result + i * p) % mod
-    print(result)
+    result = power(2, n - 2) * (n + 1) % mod
+    print(int(result))
